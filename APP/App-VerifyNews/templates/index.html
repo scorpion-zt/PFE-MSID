@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/3e3ad56424.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Verify News APP</title>
+    <link rel="stylesheet" href="../static/index.css">
+</head>
+<body>
+
+    <h1>Verify News APP</h1>
+    
+    <form method="POST" action="/VerifyNews">
+        <label for="News">News :</label>
+        <input type="text" name="News" required><br>
+
+        <div class="button-container">
+        <button type="submit">Verify</button>
+        </div>
+    </form>
+
+    {% if verification_text %}
+    
+    <div class="popup" id="resultPopup" onclick="closePopup()">
+        <div class="popup-content" onclick="event.stopPropagation();">
+            <span class="close" onclick="closePopup()">&times;</span>
+            <h2>Verification Result</h2>
+            <p>{{ verification_text }}</p>
+        </div>
+    </div>
+
+    <script>
+        if ("{{ verification_text }}") {
+            showPopup();
+        }
+
+        function showPopup() {
+            document.getElementById('resultPopup').style.display = 'flex';
+        }
+
+        function closePopup() {
+            document.getElementById('resultPopup').style.display = 'none';
+        }
+    </script>
+    {% endif %}
+
+</body>
+</html>
